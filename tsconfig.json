@@ -19,5 +19,5 @@
   "strictPropertyInitialization": false,
   "target": "es5"
  },
- "exclude": ["coverage", "dist", "jest.config.js", "node_modules", "prettier.config.js", "tmp"]
+ "exclude": ["babel.config.js", "coverage", "dist", "jest.config.js", "node_modules", "prettier.config.js", "tmp"]
 }

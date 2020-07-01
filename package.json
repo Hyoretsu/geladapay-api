@@ -1,5 +1,5 @@
 {
- "name": ,
+ "name": "geladapay-api",
  "version": "1.0.0",
  "main": "index.js",
  "license": "MIT",
@@ -20,6 +20,7 @@
   "express-async-errors": "^3.1.1",
   "ioredis": "^4.17.1",
   "mongodb": "^3.5.7",
+  "multer": "^1.4.2",
   "pg": "^8.0.3",
   "rate-limiter-flexible": "^2.1.6",
   "redis": "^3.0.2",

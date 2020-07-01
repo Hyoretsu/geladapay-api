@@ -15,13 +15,14 @@ import '@shared/container';
 
 const app = express();
 
-app.use(cors({origin:}));
+app.use(cors());
 app.use(express.json());
+app.use('/files', express.static(uploadConfig.directory));
 app.use(routes);
 
 app.use(errors);
 
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((err: Error, req: Request, res: Response) => {
  if (err instanceof AppError) {
   return res.status(err.statusCode).json({
    status: 'error',

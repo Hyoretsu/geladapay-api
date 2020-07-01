@@ -5,7 +5,7 @@ import IExampleProvider from './models/IExampleProvider';
 import ExampleProvider from './implementations/ExampleProvider';
 
 const providers = {
- example: Example,
+ example: ExampleProvider,
 };
 
-container.registerSingleton<ExampleProvider>('ExampleProvider', providers.example);
+container.registerSingleton<IExampleProvider>('ExampleProvider', providers.example);
