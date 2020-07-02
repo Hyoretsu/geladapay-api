@@ -23,7 +23,7 @@ export default class CreateUsers1593647198116 implements MigrationInterface {
      },
      {
       name: 'phone',
-      type: 'int',
+      type: 'bigint',
      },
      {
       name: 'created_at',
