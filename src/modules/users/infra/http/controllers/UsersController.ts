@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
 import CreateUserService from '@modules/users/services/CreateUserService';
+import FindUserService from '@modules/users/services/FindUserService';
 
 export default class ExamplesController {
  public async create(req: Request, res: Response): Promise<Response> {
@@ -13,6 +14,19 @@ export default class ExamplesController {
    name,
    phone,
    password,
+  });
+
+  return res.json(user);
+ }
+
+ public async index(req: Request, res: Response): Promise<Response> {
+  const { name, phone } = req.body;
+
+  const findUser = container.resolve(FindUserService);
+
+  const user = await findUser.execute({
+   name,
+   phone,
   });
 
   return res.json(user);
