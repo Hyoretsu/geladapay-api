@@ -19,4 +19,14 @@ export default class UsersRepository implements IUsersRepository {
 
   return user;
  }
+
+ public async findByPhone(phone: number): Promise<User[]> {
+  const existingUser = await this.ormRepository.find({
+   where: {
+    phone,
+   },
+  });
+
+  return existingUser;
+ }
 }

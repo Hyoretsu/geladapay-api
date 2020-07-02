@@ -1,5 +1,7 @@
 import { injectable, inject } from 'tsyringe';
 
+import AppError from '@shared/errors/AppError';
+
 import ICreateUserDTO from '../dtos/ICreateUserDTO';
 
 import IUsersRepository from '../repositories/IUsersRepository';
@@ -18,6 +20,12 @@ export default class CreateUserService {
  ) {}
 
  public async execute({ name, phone, password }: ICreateUserDTO): Promise<User> {
+  const userExists = this.usersRepository.findByPhone(phone);
+
+  if (userExists) {
+   throw new AppError('Um usuário com este número já existe. Tente novamente.', 409);
+  }
+
   const hashedPassword = await this.hashProvider.generateHash(password);
 
   const user = await this.usersRepository.create({
