@@ -19,10 +19,10 @@ export default class CreateUserService {
   private hashProvider: IHashProvider,
  ) {}
 
- public async execute({ name, phone, password }: ICreateUserDTO): Promise<User> {
-  const userExists = this.usersRepository.findByPhone(phone);
+ public async execute({ name, email, cpf, phone, password }: ICreateUserDTO): Promise<User> {
+  const userExists = await this.usersRepository.findByPhone(phone);
 
-  if (userExists) {
+  if (userExists.length !== 0) {
    throw new AppError('Um usuário com este número já existe. Tente novamente.', 409);
   }
 
@@ -30,6 +30,8 @@ export default class CreateUserService {
 
   const user = await this.usersRepository.create({
    name,
+   email,
+   cpf,
    phone,
    password: hashedPassword,
   });

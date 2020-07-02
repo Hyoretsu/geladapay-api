@@ -1,22 +1,25 @@
-import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { Request, Response } from 'express';
+import { classToClass } from 'class-transformer';
 
 import CreateUserService from '@modules/users/services/CreateUserService';
 import FindUserService from '@modules/users/services/FindUserService';
 
 export default class ExamplesController {
  public async create(req: Request, res: Response): Promise<Response> {
-  const { name, phone, password } = req.body;
+  const { name, email, cpf, phone, password } = req.body;
 
   const createUser = container.resolve(CreateUserService);
 
   const user = await createUser.execute({
    name,
+   email,
+   cpf,
    phone,
    password,
   });
 
-  return res.json(user);
+  return res.json(classToClass(user));
  }
 
  public async index(req: Request, res: Response): Promise<Response> {
@@ -29,6 +32,6 @@ export default class ExamplesController {
    phone,
   });
 
-  return res.json(user);
+  return res.json(classToClass(user));
  }
 }
