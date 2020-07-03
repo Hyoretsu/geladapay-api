@@ -20,10 +20,16 @@ export default class CreateUserService {
  ) {}
 
  public async execute({ name, email, cpf, phone, password }: ICreateUserDTO): Promise<User> {
-  const userExists = await this.usersRepository.findByCPF(cpf);
+  const existingCPF = await this.usersRepository.findByCPF(cpf);
 
-  if (userExists) {
+  if (existingCPF) {
    throw new AppError('Um usuário com este CPF já existe. Tente novamente.', 409);
+  }
+
+  const existingPhone = await this.usersRepository.findByPhone(phone);
+
+  if (existingPhone.length !== 0) {
+   throw new AppError('Um usuário com este número de telefone já existe. Tente novamente.', 409);
   }
 
   const hashedPassword = await this.hashProvider.generateHash(password);
