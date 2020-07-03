@@ -6,20 +6,26 @@ export default class Retailer {
  @PrimaryColumn('uuid')
  id: string;
 
- @Column()
+ @Column('varchar')
  name: string;
 
- @Column()
+ @Column('varchar')
  email: string;
 
- @Column()
+ @Column('varchar')
  @Exclude()
  password: string;
 
- @Column()
+ @Column('bigint')
  cnpj: number;
 
- @Column()
+ @Column('decimal', { precision: 9, scale: 7 })
+ latitude: number;
+
+ @Column('decimal', { precision: 10, scale: 7 })
+ longitude: number;
+
+ @Column('varchar')
  image: string;
 
  @CreateDateColumn()

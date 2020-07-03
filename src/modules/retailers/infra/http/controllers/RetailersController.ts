@@ -6,11 +6,19 @@ import CreateRetailerService from '@modules/retailers/services/CreateRetailerSer
 
 export default class RetailersController {
  public async create(req: Request, res: Response): Promise<Response> {
-  const { name, email, password, cnpj, image } = req.body;
+  const { name, email, password, cnpj, latitude, longitude, image } = req.body;
 
   const createRetailer = container.resolve(CreateRetailerService);
 
-  const retailer = createRetailer.execute({ name, email, password, cnpj, image });
+  const retailer = createRetailer.execute({
+   name,
+   email,
+   password,
+   cnpj,
+   latitude,
+   longitude,
+   image,
+  });
 
   return res.json(classToClass(retailer));
  }

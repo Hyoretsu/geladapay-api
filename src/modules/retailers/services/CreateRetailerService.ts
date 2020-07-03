@@ -16,7 +16,15 @@ export default class CreateRetailerService {
   private hashProvider: IHashProvider,
  ) {}
 
- public async execute({ name, email, password, cnpj, image }: ICreateRetailerDTO): Promise<Retailer> {
+ public async execute({
+  name,
+  email,
+  password,
+  cnpj,
+  latitude,
+  longitude,
+  image,
+ }: ICreateRetailerDTO): Promise<Retailer> {
   const hashedPassword = await this.hashProvider.generateHash(password);
 
   const retailer = await this.retailersRepository.create({
@@ -24,6 +32,8 @@ export default class CreateRetailerService {
    email,
    cnpj,
    password: hashedPassword,
+   latitude,
+   longitude,
    image,
   });
 

@@ -3,5 +3,7 @@ export default interface ICreateRetailerDTO {
  email: string;
  password: string;
  cnpj: number;
+ latitude: number;
+ longitude: number;
  image?: string;
 }
