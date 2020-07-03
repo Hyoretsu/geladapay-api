@@ -4,5 +4,7 @@ export default interface ICreateRetailerRequestDTO {
  password: string;
  cnpj: number;
  address: string;
+ city: string;
+ state: string;
  image?: string;
 }

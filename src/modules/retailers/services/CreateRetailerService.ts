@@ -22,11 +22,22 @@ export default class CreateRetailerService {
   private hashProvider: IHashProvider,
  ) {}
 
- public async execute({ name, email, password, cnpj, address, image }: ICreateRetailerRequestDTO): Promise<Retailer> {
-  let latitude;
-  let longitude;
+ public async execute({
+  name,
+  email,
+  password,
+  cnpj,
+  address,
+  city,
+  state,
+  image,
+ }: ICreateRetailerRequestDTO): Promise<Retailer> {
+  let latitude = 0;
+  let longitude = 0;
 
-  await fetch(`https://us1.locationiq.com/v1/search.php?key=${process.env.LOCATIONIQ_TOKEN}&q=${address}&format=json`)
+  await fetch(
+   `https://us1.locationiq.com/v1/search.php?key=${process.env.LOCATIONIQ_TOKEN}&q=${address},${city},${state}&format=json`,
+  )
    .then<IRequest[]>(res => res.json())
    .then(data => {
     latitude = data[0].lat;
