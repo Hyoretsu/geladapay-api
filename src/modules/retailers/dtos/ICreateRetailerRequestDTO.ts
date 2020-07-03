@@ -1,9 +1,8 @@
-export default interface ICreateRetailerDTO {
+export default interface ICreateRetailerRequestDTO {
  name: string;
  email: string;
  password: string;
  cnpj: number;
- latitude: any;
- longitude: any;
+ address: string;
  image?: string;
 }
