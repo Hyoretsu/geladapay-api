@@ -44,16 +44,13 @@ export default class CreateRetailerService {
     longitude = data[0].lon;
    });
 
-  console.log(latitude);
-  console.log(longitude);
-
   const hashedPassword = await this.hashProvider.generateHash(password);
 
   const retailer = await this.retailersRepository.create({
    name,
    email,
-   cnpj,
    password: hashedPassword,
+   cnpj,
    latitude,
    longitude,
    image,

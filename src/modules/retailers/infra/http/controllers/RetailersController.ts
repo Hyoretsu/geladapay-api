@@ -10,7 +10,7 @@ export default class RetailersController {
 
   const createRetailer = container.resolve(CreateRetailerService);
 
-  const retailer = createRetailer.execute({
+  const retailer = await createRetailer.execute({
    name,
    email,
    password,
