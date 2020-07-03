@@ -3,7 +3,7 @@ import { Exclude } from 'class-transformer';
 
 @Entity('users')
 export default class User {
- @PrimaryGeneratedColumn()
+ @PrimaryGeneratedColumn('uuid')
  id: string;
 
  @Column()
