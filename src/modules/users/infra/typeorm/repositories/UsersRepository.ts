@@ -1,4 +1,4 @@
-import { getRepository, Repository } from 'typeorm';
+import { getRepository, Repository, Like } from 'typeorm';
 
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
@@ -33,7 +33,7 @@ export default class UsersRepository implements IUsersRepository {
  public async findByName(name: string): Promise<User[]> {
   const users = await this.ormRepository.find({
    where: {
-    name,
+    name: Like(`%${name}%`),
    },
   });
 
@@ -43,7 +43,7 @@ export default class UsersRepository implements IUsersRepository {
  public async findByPhone(phone: number): Promise<User[]> {
   const existingUser = await this.ormRepository.find({
    where: {
-    phone,
+    phone: Like(`${phone}`),
    },
   });
 
