@@ -1,6 +1,8 @@
 import { injectable, inject } from 'tsyringe';
 import fetch from 'node-fetch';
 
+import AppError from '@shared/errors/AppError';
+
 import IHashProvider from '@shared/container/providers/HashProvider/models/IHashProvider';
 import ICreateRetailerRequestDTO from '../dtos/ICreateRetailerRequestDTO';
 import IRetailersRepository from '../repositories/IRetailersRepository';
@@ -43,8 +45,11 @@ export default class CreateRetailerService {
     longitude = data[0].lon;
    });
 
-  console.log(latitude);
-  console.log(longitude);
+  const existingRetailer = this.retailersRepository.findByCNPJ(cnpj);
+
+  if (existingRetailer) {
+   throw new AppError('Um vendedor com este CNPJ já está cadastrado. Tente novamente.');
+  }
 
   const hashedPassword = await this.hashProvider.generateHash(password);
 
