@@ -32,9 +32,7 @@ export default class UpdateUserAvatarService {
    await this.storageProvider.deleteFile(retailer.image);
   }
 
-  const filename = await this.storageProvider.saveFile(imageFilename);
-
-  retailer.image = filename;
+  retailer.image = imageFilename;
 
   await this.retailersRepository.save(retailer);
 
