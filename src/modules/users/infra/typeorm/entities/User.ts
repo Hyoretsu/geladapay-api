@@ -6,19 +6,19 @@ export default class User {
  @PrimaryGeneratedColumn('uuid')
  id: string;
 
- @Column()
+ @Column('varchar')
  name: string;
 
- @Column()
+ @Column('varchar')
  email: string;
 
- @Column()
+ @Column('bigint')
  cpf: number;
 
- @Column()
+ @Column('bigint')
  phone: number;
 
- @Column()
+ @Column('varchar')
  @Exclude()
  password: string;
 
