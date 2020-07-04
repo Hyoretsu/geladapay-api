@@ -30,7 +30,6 @@ export default class CreateRetailerService {
   address,
   city,
   state,
-  image,
  }: ICreateRetailerRequestDTO): Promise<Retailer> {
   let latitude = 0;
   let longitude = 0;
@@ -44,16 +43,18 @@ export default class CreateRetailerService {
     longitude = data[0].lon;
    });
 
+  console.log(latitude);
+  console.log(longitude);
+
   const hashedPassword = await this.hashProvider.generateHash(password);
 
   const retailer = await this.retailersRepository.create({
    name,
    email,
-   password: hashedPassword,
    cnpj,
+   password: hashedPassword,
    latitude,
    longitude,
-   image,
   });
 
   return retailer;

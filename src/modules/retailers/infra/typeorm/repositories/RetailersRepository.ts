@@ -19,4 +19,36 @@ export default class RetailersRepository implements IRetailersRepository {
 
   return retailer;
  }
+
+ public async findByCNPJ(cnpj: number): Promise<Retailer | undefined> {
+  const retailer = await this.ormRepository.findOne({
+   where: {
+    cnpj,
+   },
+  });
+
+  return retailer;
+ }
+
+ public async findByEmail(email: string): Promise<Retailer | undefined> {
+  const retailer = await this.ormRepository.findOne({
+   where: {
+    email,
+   },
+  });
+
+  return retailer;
+ }
+
+ public async findById(id: string): Promise<Retailer | undefined> {
+  const retailer = await this.ormRepository.findOne(id);
+
+  return retailer;
+ }
+
+ public async save(retailer: Retailer): Promise<Retailer> {
+  await this.ormRepository.save(retailer);
+
+  return retailer;
+ }
 }

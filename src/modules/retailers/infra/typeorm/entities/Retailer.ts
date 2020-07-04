@@ -1,5 +1,7 @@
 import { Entity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
-import { Exclude } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
+
+import uploadConfig from '@config/upload';
 
 @Entity('retailers')
 export default class Retailer {
@@ -33,4 +35,18 @@ export default class Retailer {
 
  @UpdateDateColumn()
  updated_at: Date;
+
+ @Expose({ name: 'avatar_url' })
+ getAvatarUrl(): string | null {
+  if (!this.image) {
+   return null;
+  }
+
+  switch (uploadConfig.driver) {
+   case 'disk':
+    return `${process.env.APP_API_URL}/files/${this.image}`;
+   default:
+    return null;
+  }
+ }
 }

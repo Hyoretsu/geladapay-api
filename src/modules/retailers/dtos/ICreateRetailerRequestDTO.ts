@@ -6,5 +6,4 @@ export default interface ICreateRetailerRequestDTO {
  address: string;
  city: string;
  state: string;
- image?: string;
 }

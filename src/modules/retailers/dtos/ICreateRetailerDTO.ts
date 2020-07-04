@@ -5,5 +5,4 @@ export default interface ICreateRetailer {
  cnpj: number;
  latitude: number;
  longitude: number;
- image?: string;
 }
