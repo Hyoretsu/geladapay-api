@@ -30,6 +30,22 @@ export default class UsersRepository implements IUsersRepository {
   return user;
  }
 
+ public async findByEmail(email: string): Promise<User | undefined> {
+  const user = await this.ormRepository.findOne({
+   where: {
+    email,
+   },
+  });
+
+  return user;
+ }
+
+ public async findById(id: string): Promise<User | undefined> {
+  const user = await this.ormRepository.findOne(id);
+
+  return user;
+ }
+
  public async findByName(name: string): Promise<User[]> {
   const users = await this.ormRepository.find({
    where: {
@@ -41,12 +57,18 @@ export default class UsersRepository implements IUsersRepository {
  }
 
  public async findByPhone(phone: number): Promise<User[]> {
-  const existingUser = await this.ormRepository.find({
+  const user = await this.ormRepository.find({
    where: {
-    phone: Like(`${phone}`),
+    phone,
    },
   });
 
-  return existingUser;
+  return user;
+ }
+
+ public async save(user: User): Promise<User> {
+  await this.ormRepository.save(user);
+
+  return user;
  }
 }

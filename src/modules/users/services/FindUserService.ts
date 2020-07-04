@@ -16,7 +16,7 @@ export default class FindUserService {
  constructor(@inject('UsersRepository') private usersRepository: IUsersRepository) {}
 
  public async execute({ name, phone }: IFindUserDTO): Promise<User[]> {
-  let user: any[] = [];
+  let user: User[] = [];
 
   if (name) {
    user = await this.usersRepository.findByName(name);
